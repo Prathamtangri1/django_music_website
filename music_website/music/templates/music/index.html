@@ -1,12 +1,18 @@
-{% if all_albums %}
-  <h3>Albums: <br /></h3>
-  <ul>
-    {% for album in all_albums%}
-      <li>
-         <a href= {{url 'music:detail' album_id}}"/music/{{album.id}}/">{{album.title}}</a></h4>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <h2>You don't have any albums stored</h2>
-{% endif %}
+<!-- Loads the static files -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}" />
+
+<body>
+  {% if all_albums %}
+    <h3>Albums: <br /></h3>
+    <ul>
+      {% for album in all_albums %}
+        <li>
+           <h4><a href= "{%url 'music:detail' album.id%}"/>{{album.title}}</a></h4>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>You don't have any albums stored</h2>
+  {% endif %}
+</body>
