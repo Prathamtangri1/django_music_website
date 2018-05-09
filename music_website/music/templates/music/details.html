@@ -1,0 +1,24 @@
+<img src={{album.logo}} width=300px height=300px/>
+
+<h2>{{album.title}}</h3>
+<h1>{{album.artist}}</h1>
+
+{% if error_message %}
+  <h3>{{error_message}}</h3>
+{% endif %}
+
+
+<form method="post" action="{% url 'music:favourite' album.id %}">
+  {% csrf_token %}
+  {% for song in album.song_set.all %}
+      <input type="radio" id="song{{ forloop.counter }}" name="song" value="{{song.id}}" />
+      <label for="{{ forloop.counter }}">
+        {{song}}
+        {% if song.is_favourite %}
+          <img src="https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.freestockphotos.biz%2Fpictures%2F7%2F7945%2Fstars.png&f=1" width=10px height=10px/>
+        {% endif %}
+      </label>
+      <br />
+  {%endfor%}
+  <input type="submit" value="Favourite" />
+</form>
